@@ -15,14 +15,14 @@ public class MCTestReader {
     }
 
     public static void readAll() {
-        System.out.println("Starting to read the files! ");
         String initials = "data/";
+        System.out.println("Starting to read the files! ");
         //readTSV(initials + "mc160.train.tsv");
-        readTSV(initials + "mc160.test.tsv");
+//        readTSV(initials + "mc160.test.tsv");
         //readTSV(initials + "mc160.dev.tsv");
 
         //readTSV(initials + "mc500.train.tsv");
-        //readTSV(initials + "mc500.test.tsv");
+        readTSV(initials + "mc500.test.tsv");
         //readTSV(initials + "mc500.dev.tsv");
         System.out.println("Done with reading the files! ");
     }

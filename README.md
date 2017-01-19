@@ -7,8 +7,8 @@ Here are some numbers:
 
 | Dataset     | all data | multiple sentence | single sentence |
 |-------------|----------|-------------------|-----------------|
-| MC160(test) | 61.66    | 55.468            | 68.75           |
-| MC500(test) | 54.5     | 53.353            | 55.882          |
+| MC160(test) | 65.416    |    57.031         | 75.0   |
+| MC500(test) | 55.66 | 54.878        | 56.617      |
 
 
 ## Bugs/Typos/Suggestions? 

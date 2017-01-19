@@ -1,31 +1,26 @@
 package edu.illinois.cs.cogcomp.McTest;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
 public class MCTestBaseline {
-    static String initials = "C:\\Users\\Daniel\\Dropbox\\semanticmodeling_withcooccurance\\data\\MCTEST\\DownloadedFromWeb\\";
+    static String initials = "data/";
 
     static double dweight;
     static boolean whichNot;
     static boolean doStem;
     static HashSet<String> stopWords;
-    //public static boolean verbose;
-    //static char[] separators = new char[] { ' ', '\n', '\t' };
     static String separators = " |\n|\t";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         initialize();
         baseline();
     }
 
-    private static void initialize() {
+    private static void initialize() throws IOException {
         dweight = 1;
         doStem = false;
         whichNot = false;
@@ -36,24 +31,11 @@ public class MCTestBaseline {
 
     public static void baseline() {
         int correctMulti = 0, correctSingle = 0, correctAll = 0, totalMulti = 0, totalSingle = 0, totalAll = 0;
-        //List<double[]> scoresAll = new ArrayList<double[]>();
-
-        //System.out.println("size of the instances = " + MCTestReader.mcAll.size() );
-
-        int storyIter = 0;
         for (MCTestInstance ins : MCTestReader.mcAll) {
-            //System.out.println("storyIter = " + storyIter);
 
             String normedPassage = normalizeString(ins.story);
             String[] normedPassageArr = normedPassage.split(separators);
-            //System.out.println("normedPassageArr.length = " + normedPassageArr.length );
-            //for( String str : normedPassageArr )
-            //	System.out.println( str );
-            //System.out.print("\n");
-
             for (int qIter = 0; qIter < 4; qIter++) {
-                // System.out.println("qIter = " + qIter);
-
                 String[] candidateAnswers = ins.options[qIter];
                 String normedQuestion = normalizeString(ins.questions[qIter]);
                 boolean chooseBest = true;
@@ -62,7 +44,6 @@ public class MCTestBaseline {
                     chooseBest = false;
 
                 double[] answerScores = ScoreAnswers(normedPassageArr, normedQuestion, candidateAnswers, stopWords);
-                //double[] answerScores = ScoreAnswersNormalized(normedPassageArr, normedQuestion, candidateAnswers, stopWords);
 
                 List<Integer> selectedAnswers = chooseBest ? BestItems(answerScores) : WorstItems(answerScores);
 
@@ -82,8 +63,6 @@ public class MCTestBaseline {
                 else
                     totalSingle += 1;
                 totalAll += 1;
-                //scoresAll.add(answerScores);
-                storyIter++;
             }
         }
 
@@ -249,19 +228,15 @@ public class MCTestBaseline {
         return invCount;
     }
 
-    public static void readStopWords() {
+    public static void readStopWords() throws IOException {
         stopWords = new HashSet<String>();
         String stopF = initials + "stopwords.txt";
-        try {
-            InputStream ips = new FileInputStream(stopF);
-            InputStreamReader ipsr = new InputStreamReader(ips);
-            BufferedReader br = new BufferedReader(ipsr);
-            String line;
-            while ((line = br.readLine()) != null) {
-                stopWords.add(line);
-            }
-        } catch (Exception e) {
-            System.out.println(e.toString());
+        InputStream ips = new FileInputStream(stopF);
+        InputStreamReader ipsr = new InputStreamReader(ips);
+        BufferedReader br = new BufferedReader(ipsr);
+        String line;
+        while ((line = br.readLine()) != null) {
+            stopWords.add(line);
         }
     }
 
