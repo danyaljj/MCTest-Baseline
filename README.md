@@ -1,9 +1,14 @@
 # MCTest-Baseline
 
 Sliding window baseline for MCTest [as explained in the paper](http://www.msr-waypoint.com/en-us/um/people/cburges/papers/MCTest-EMNLP13.pdf) (which can be used for any machine comprehension task, as a baseline). 
-Wrote this a couple of years ago; putting it here in case anyone wants to use it. 
+Wrote this a couple of years ago based on Chris Burges's original C# implementation; putting it here in case anyone wants to use it. 
 
 Here are some numbers: 
+
+| Dataset     | all data | multiple sentence | single sentence |
+|-------------|----------|-------------------|-----------------|
+| MC160(test) | 61.66    | 55.468            | 68.75           |
+| MC500(test) | 54.5     | 53.353            | 55.882          |
 
 
 ## Bugs/Typos/Suggestions? 
