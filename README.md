@@ -12,4 +12,4 @@ Here are some numbers:
 
 
 ## Bugs/Typos/Suggestions? 
-Sure! send a PR and open an issue. 
+Sure! send a PR or open an issue. 
